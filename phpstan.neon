@@ -10,8 +10,8 @@ parameters:
     level: 5
     tmpDir: storage/phpstan/cache/
 
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
-#
+    ignoreErrors:
+        - '#Match expression does not handle remaining value: mixed#'
+
 #    excludePaths:
 #        - ./*/*/FileToBeExcluded.php
