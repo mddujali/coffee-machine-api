@@ -18,4 +18,14 @@ enum Coffee: string
     {
         return array_column(self::cases(), 'value');
     }
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::ESPRESSO => 'Espresso',
+            self::DOUBLE_ESPRESSO => 'Double Espresso',
+            self::RISTRETTO => 'Ristretto',
+            self::AMERICANO => 'Americano',
+        };
+    }
 }

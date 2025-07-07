@@ -6,9 +6,9 @@ namespace App\Enums;
 
 enum Container: string
 {
-    case WATER = 'water';
-
     case COFFEE = 'coffee';
+
+    case WATER = 'water';
 
     public static function values(): array
     {

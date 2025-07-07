@@ -21,14 +21,16 @@ class ContainerTest extends BaseModelTestCase
         $this->columns = [
             'id',
             'type',
-            'quantity',
+            'size',
+            'unit',
             'created_at',
             'updated_at',
         ];
 
         $this->fillable = [
             'type',
-            'quantity',
+            'size',
+            'unit',
         ];
     }
 }

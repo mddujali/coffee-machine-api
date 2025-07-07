@@ -7,20 +7,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $type
+ * @property float $size
+ * @property string $unit
+ */
 class Container extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'type',
-        'quantity',
+        'size',
+        'unit',
     ];
 
     protected function casts(): array
     {
         return [
             'type' => 'string',
-            'quantity' => 'decimal',
+            'size' => 'float',
+            'unit' => 'string',
         ];
     }
 }
