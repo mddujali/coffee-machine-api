@@ -26,7 +26,7 @@ class ContainerSeeder extends Seeder
         Container::query()
             ->create([
                 'type' => ContainerEnum::WATER,
-                'size' => 2000, // 2ml = 2l
+                'size' => 2000, // 2000ml = 2l
                 'unit' => Unit::MILLILITERS,
             ]);
     }

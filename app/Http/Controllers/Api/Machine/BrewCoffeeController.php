@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Machine;
 
+use App\Enums\Unit;
 use App\Http\Requests\Api\Machine\BrewCoffeeRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -28,7 +29,11 @@ class BrewCoffeeController extends BaseMachineController
                 status: Response::HTTP_BAD_REQUEST,
                 message: 'Coffee is not enough.',
                 errors: [
-                    'coffee' => 'The remaining coffee is ' . $remainingCoffee . 'g, the required is ' . $remainingCoffee . 'g.',
+                    'coffee' => sprintf(
+                        'The remaining coffee is %s but the required is %s.',
+                        $remainingCoffee . Unit::GRAMS->label(),
+                        $requiredCoffee . Unit::GRAMS->label(),
+                    ),
                 ]
             );
         }
@@ -38,7 +43,11 @@ class BrewCoffeeController extends BaseMachineController
                 status: Response::HTTP_BAD_REQUEST,
                 message: 'Water is not enough.',
                 errors: [
-                    'water' => 'The remaining water is ' . $requiredWater . 'g, the required is ' . $requiredWater . 'g.',
+                    'water' => sprintf(
+                        'The remaining water is %s but the required is %s.',
+                        $remainingWater . Unit::MILLILITERS->label(),
+                        $requiredWater . Unit::MILLILITERS->label()
+                    ),
                 ]
             );
         }
