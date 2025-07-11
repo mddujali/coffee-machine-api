@@ -38,7 +38,7 @@ class RefillContainerTest extends BaseTestCase
     public function test_it_should_return_validation_failed(array $data): void
     {
         $response = $this->json(
-            method: 'POST',
+            method: 'PATCH',
             uri: route('api.machine.container.refill'),
             data: $data
         );
@@ -57,7 +57,7 @@ class RefillContainerTest extends BaseTestCase
         ];
 
         $response = $this->json(
-            method: 'POST',
+            method: 'PATCH',
             uri: route('api.machine.container.refill'),
             data: $data
         );

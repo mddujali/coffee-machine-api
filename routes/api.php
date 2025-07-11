@@ -23,7 +23,7 @@ Route::prefix('machine')
         Route::prefix('container')
             ->name('container.')
             ->group(function (): void {
-                Route::post('refill', RefillContainerController::class)
+                Route::patch('refill', RefillContainerController::class)
                     ->name('refill');
             });
     });
