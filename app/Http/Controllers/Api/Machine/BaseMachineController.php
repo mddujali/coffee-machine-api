@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Machine;
 
-use App\Enums\Unit;
 use App\Http\Controllers\Api\BaseController;
+use App\Http\Resources\Api\Containers\ContainerResource;
 use App\Services\CoffeeContainerService;
 use App\Services\WaterContainerService;
 
@@ -23,71 +23,14 @@ abstract class BaseMachineController extends BaseController
 
     public function __construct(protected readonly CoffeeContainerService $coffee, protected readonly WaterContainerService $water)
     {
-        $this->recipes = [
-            'espresso' => [
-                'coffee' => [
-                    'quantity' => 8,
-                    'unit' => $this->unit(Unit::GRAMS),
-                ],
-                'water' => [
-                    'quantity' => 24,
-                    'unit' => $this->unit(Unit::MILLILITERS),
-                ],
-            ],
-            'double_espresso' => [
-                'coffee' => [
-                    'quantity' => 16,
-                    'unit' => $this->unit(Unit::GRAMS),
-                ],
-                'water' => [
-                    'quantity' => 48,
-                    'unit' => $this->unit(Unit::MILLILITERS),
-                ],
-            ],
-            'ristretto' => [
-                'coffee' => [
-                    'quantity' => 8,
-                    'unit' => $this->unit(Unit::GRAMS),
-                ],
-                'water' => [
-                    'quantity' => 16,
-                    'unit' => $this->unit(Unit::MILLILITERS),
-                ],
-            ],
-            'americano' => [
-                'coffee' => [
-                    'quantity' => 16,
-                    'unit' => $this->unit(Unit::GRAMS),
-                ],
-                'water' => [
-                    'quantity' => 148,
-                    'unit' => $this->unit(Unit::MILLILITERS),
-                ]
-            ],
-        ];
-    }
 
-    protected function unit(Unit $unit): array
-    {
-        return [
-            'label' => $unit->label(),
-            'value' => $unit->value,
-        ];
     }
 
     protected function containers(): array
     {
         return [
-            'coffee' => [
-                'id' => $this->coffee->container()->id,
-                'quantity' => $this->coffee->get(),
-                'unit' => $this->unit(Unit::GRAMS),
-            ],
-            'water' => [
-                'id' => $this->water->container()->id,
-                'quantity' => $this->water->get(),
-                'unit' => $this->unit(Unit::MILLILITERS),
-            ],
+            new ContainerResource($this->coffee->container()),
+            new ContainerResource($this->water->container()),
         ];
     }
 }

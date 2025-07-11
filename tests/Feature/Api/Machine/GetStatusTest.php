@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Api\Machine;
 
 use Database\Seeders\ContainerSeeder;
+use Database\Seeders\RecipeSeeder;
 use Illuminate\Http\Response;
 use Tests\Feature\Api\BaseTestCase;
 
@@ -12,7 +13,8 @@ class GetStatusTest extends BaseTestCase
 {
     public function test_it_return_machine_status(): void
     {
-        $this->artisan('db:seed', ['--class' => ContainerSeeder::class]);
+        $this->seed(ContainerSeeder::class);
+        $this->seed(RecipeSeeder::class);
 
         $response = $this->json(
             method: 'GET',
@@ -24,26 +26,18 @@ class GetStatusTest extends BaseTestCase
             'message',
             'data' => [
                 'recipes' => [
-                    'espresso' => [
-                        'coffee' => ['quantity', 'unit'],
-                        'water' => ['quantity', 'unit'],
-                    ],
-                    'double_espresso' => [
-                        'coffee' => ['quantity', 'unit'],
-                        'water' => ['quantity', 'unit'],
-                    ],
-                    'ristretto' => [
-                        'coffee' => ['quantity', 'unit'],
-                        'water' => ['quantity', 'unit'],
-                    ],
-                    'americano' => [
-                        'coffee' => ['quantity', 'unit'],
-                        'water' => ['quantity', 'unit'],
+                    '*' => [
+                        '*' => [
+                            'id',
+                            'coffee' => ['quantity', 'unit'],
+                            'water' => ['quantity', 'unit'],
+                        ],
                     ],
                 ],
                 'containers' => [
-                    'coffee' => ['id', 'quantity', 'unit'],
-                    'water' => ['id', 'quantity', 'unit'],
+                    '*' => [
+                        '*' => ['id', 'quantity', 'unit'],
+                    ],
                 ],
             ],
         ]);

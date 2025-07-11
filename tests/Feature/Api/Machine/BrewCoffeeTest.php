@@ -10,6 +10,7 @@ use App\Enums\Status;
 use App\Enums\Unit;
 use App\Models\Container;
 use Database\Seeders\ContainerSeeder;
+use Database\Seeders\RecipeSeeder;
 use Generator;
 use Illuminate\Http\Response;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -174,6 +175,8 @@ class BrewCoffeeTest extends BaseTestCase
             Container::factory($container)->create();
         }
 
+        $this->seed(RecipeSeeder::class);
+
         $response = $this->json(
             method: 'POST',
             uri: route('api.machine.brew-coffee'),
@@ -187,7 +190,8 @@ class BrewCoffeeTest extends BaseTestCase
     #[DataProvider('coffeeBrewedDataProvider')]
     public function test_it_should_brew_coffee(array $data, array $expects): void
     {
-        $this->artisan('db:seed', ['--class' => ContainerSeeder::class]);
+        $this->seed(ContainerSeeder::class);
+        $this->seed(RecipeSeeder::class);
 
         $response = $this->json(
             method: 'POST',
@@ -199,14 +203,17 @@ class BrewCoffeeTest extends BaseTestCase
         $response->assertExactJsonStructure([
             'message',
             'data' => [
-                'type',
                 'recipe' => [
-                    'coffee' => ['quantity', 'unit'],
-                    'water' => ['quantity', 'unit'],
+                    '*' => [
+                        'id',
+                        'coffee' => ['quantity', 'unit'],
+                        'water' => ['quantity', 'unit'],
+                    ]
                 ],
                 'containers' => [
-                    'coffee' => ['id', 'quantity', 'unit'],
-                    'water' => ['id', 'quantity', 'unit'],
+                    '*' => [
+                        '*' => ['id', 'quantity', 'unit'],
+                    ],
                 ],
             ],
         ]);

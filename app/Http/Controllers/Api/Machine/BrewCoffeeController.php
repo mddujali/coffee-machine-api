@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Api\Machine;
 
 use App\Enums\Unit;
 use App\Http\Requests\Api\Machine\BrewCoffeeRequest;
+use App\Http\Resources\Api\Recipes\RecipeResource;
+use App\Models\Recipe;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
@@ -20,9 +22,22 @@ class BrewCoffeeController extends BaseMachineController
         $remainingCoffee = $this->coffee->get();
         $remainingWater = $this->water->get();
 
-        $recipe = $this->recipes[$request->validated('type')];
-        $requiredCoffee = $recipe['coffee']['quantity'];
-        $requiredWater = $recipe['water']['quantity'];
+        $recipe = Recipe::query()
+            ->where('type', $request->validated('type'))
+            ->first();
+
+        if ( ! $recipe) {
+            return $this->errorResponse(
+                status: Response::HTTP_BAD_REQUEST,
+                message: 'Invalid recipe type.',
+                errors: [
+                    'type' => 'The selected recipe type is not valid.',
+                ]
+            );
+        }
+
+        $requiredCoffee = $recipe->ingredients['coffee']['quantity'];
+        $requiredWater = $recipe->ingredients['water']['quantity'];
 
         if ($requiredCoffee > $remainingCoffee) {
             return $this->errorResponse(
@@ -59,8 +74,7 @@ class BrewCoffeeController extends BaseMachineController
         return $this->successResponse(
             message: 'Coffee has been brewed.',
             data: [
-                'type' => $request->validated('type'),
-                'recipe' => $recipe,
+                'recipe' => new RecipeResource($recipe),
                 'containers' => $this->containers(),
             ]
         );

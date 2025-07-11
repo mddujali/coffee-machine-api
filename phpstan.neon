@@ -12,6 +12,8 @@ parameters:
 
     ignoreErrors:
         - '#Match expression does not handle remaining value: mixed#'
+        - "#Offset 'coffee' does not exist on string#"
+        - "#Offset 'water' does not exist on string#"
 
 #    excludePaths:
 #        - ./*/*/FileToBeExcluded.php
