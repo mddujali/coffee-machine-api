@@ -20,14 +20,15 @@ class ContainerResource extends BaseJsonResource
     #[Override]
     public function toArray(Request $request): array
     {
+        $unit = Unit::from($this->unit);
+
         return [
-            $this->type => [
-                'id' => $this->id,
-                'quantity' => $this->size,
-                'unit' => [
-                    'label' => Unit::from($this->unit)->label(),
-                    'value' => $this->unit,
-                ],
+            'id' => $this->id,
+            'type' => $this->type,
+            'quantity' => $this->size,
+            'unit' => [
+                'label' => $unit->label(),
+                'value' => $unit->value,
             ],
         ];
     }

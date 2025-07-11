@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\Machine;
 
 use App\Enums\Container as ContainerEnum;
+use App\Exceptions\Json\HttpJsonException;
 use App\Http\Requests\Api\Machine\RefillContainerRequest;
 use App\Http\Resources\Api\Containers\ContainerResource;
-use Illuminate\Http\JsonResponse;
 
 class RefillContainerController extends BaseMachineController
 {
     /**
      * @param RefillContainerRequest $request
-     * @return JsonResponse
+     * @return ContainerResource
+     * @throws HttpJsonException
      */
     public function __invoke(RefillContainerRequest $request)
     {
@@ -27,12 +28,12 @@ class RefillContainerController extends BaseMachineController
             ContainerEnum::WATER->value => $this->water->container(),
         };
 
-        return $this->successResponse(
-            message: sprintf(
-                '%s container has been refilled.',
-                ContainerEnum::from($request->validated('type'))->label()
-            ),
-            data:['container' => new ContainerResource($container)]
-        );
+        return (new ContainerResource($container))
+            ->setMessage(
+                sprintf(
+                    '%s container has been refilled.',
+                    ContainerEnum::from($request->validated('type'))->label()
+                )
+            );
     }
 }

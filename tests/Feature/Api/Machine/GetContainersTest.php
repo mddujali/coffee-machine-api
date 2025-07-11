@@ -23,14 +23,11 @@ class GetContainersTest extends BaseTestCase
         $response->assertExactJsonStructure([
             'message',
             'data' => [
-                'containers' => [
-                    '*' => [
-                        '*' => [
-                            'id',
-                            'quantity',
-                            'unit' => ['label', 'value'],
-                        ],
-                    ],
+                '*' => [
+                    'id',
+                    'type',
+                    'quantity',
+                    'unit' => ['label', 'value'],
                 ],
             ],
         ]);

@@ -66,13 +66,10 @@ class RefillContainerTest extends BaseTestCase
         $response->assertExactJsonStructure([
             'message',
             'data' => [
-                'container' => [
-                    '*' => [
-                        'id',
-                        'quantity',
-                        'unit' => ['label', 'value'],
-                    ],
-                ],
+                'id',
+                'type',
+                'quantity',
+                'unit' => ['label', 'value'],
             ],
         ]);
     }

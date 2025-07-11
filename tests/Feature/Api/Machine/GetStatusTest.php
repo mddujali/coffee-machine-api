@@ -27,16 +27,24 @@ class GetStatusTest extends BaseTestCase
             'data' => [
                 'recipes' => [
                     '*' => [
-                        '*' => [
-                            'id',
-                            'coffee' => ['quantity', 'unit'],
-                            'water' => ['quantity', 'unit'],
+                        'id',
+                        'type',
+                        'coffee' => [
+                            'quantity',
+                            'unit' => ['label', 'value'],
                         ],
-                    ],
+                        'water' => [
+                            'quantity',
+                            'unit' => ['label', 'value'],
+                        ],
+                    ]
                 ],
                 'containers' => [
                     '*' => [
-                        '*' => ['id', 'quantity', 'unit'],
+                        'id',
+                        'type',
+                        'quantity',
+                        'unit' => ['label', 'value'],
                     ],
                 ],
             ],

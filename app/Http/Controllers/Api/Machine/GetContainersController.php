@@ -11,6 +11,10 @@ use App\Models\Container;
 
 class GetContainersController extends BaseController
 {
+    /**
+     * @param GetContainersRequest $request
+     * @return ContainerCollection
+     */
     public function __invoke(GetContainersRequest $request)
     {
         $containers = Container::query()
@@ -19,8 +23,7 @@ class GetContainersController extends BaseController
             })
             ->get();
 
-        return $this->successResponse(
-            data: ['containers' => new ContainerCollection($containers)]
-        );
+        return (new ContainerCollection($containers))
+            ->setMessage(__('shared.common.success'));
     }
 }
