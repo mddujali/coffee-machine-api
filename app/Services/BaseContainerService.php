@@ -8,5 +8,5 @@ use App\Models\Container;
 
 abstract class BaseContainerService implements ContainerInterface
 {
-    abstract protected function findContainer(): Container;
+    abstract public function container(): Container;
 }

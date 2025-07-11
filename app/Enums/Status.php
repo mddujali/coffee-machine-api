@@ -6,11 +6,11 @@ namespace App\Enums;
 
 use App\Support\Traits\Enums\HasHelpers;
 
-enum Container: string
+enum Status: string
 {
     use HasHelpers;
 
-    case COFFEE = 'coffee';
+    case ACTIVE = 'active';
 
-    case WATER = 'water';
+    case INACTIVE = 'inactive';
 }

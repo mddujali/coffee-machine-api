@@ -22,7 +22,9 @@ class ContainerTest extends BaseModelTestCase
             'id',
             'type',
             'size',
+            'limit',
             'unit',
+            'status',
             'created_at',
             'updated_at',
         ];

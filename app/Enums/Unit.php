@@ -5,30 +5,29 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
+use App\Support\Traits\Enums\HasHelpers;
+
 enum Unit: string
 {
-    case MILLILITERS = 'milliliters';
+    use HasHelpers;
 
     case GRAMS = 'grams';
 
-    public static function values(): array
-    {
-        return array_column(self::cases(), 'value');
-    }
+    case MILLILITERS = 'milliliters';
 
     public function value(): string
     {
         return match ($this) {
-            self::MILLILITERS => self::MILLILITERS->value,
             self::GRAMS => self::GRAMS->value,
+            self::MILLILITERS => self::MILLILITERS->value,
         };
     }
 
     public function label(): string
     {
         return match ($this) {
-            self::MILLILITERS => 'ml',
             self::GRAMS => 'g',
+            self::MILLILITERS => 'ml',
         };
     }
 }

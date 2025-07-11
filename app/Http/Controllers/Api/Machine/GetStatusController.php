@@ -16,12 +16,10 @@ class GetStatusController extends BaseMachineController
     public function __invoke(Request $request)
     {
         return $this->successResponse(
+            message: 'Coffee machine is ready to brew.',
             data: [
-                'recipe' => $this->recipe,
-                'containers' => [
-                    'coffee' => $this->coffee->get(),
-                    'water' => $this->water->get(),
-                ],
+                'recipes' => $this->recipes,
+                'containers' => $this->containers(),
             ]
         );
     }

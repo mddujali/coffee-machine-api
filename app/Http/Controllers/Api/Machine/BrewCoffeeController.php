@@ -20,9 +20,9 @@ class BrewCoffeeController extends BaseMachineController
         $remainingCoffee = $this->coffee->get();
         $remainingWater = $this->water->get();
 
-        $recipe = $this->recipe[$request->validated('type')];
-        $requiredCoffee = $recipe['coffee'];
-        $requiredWater = $recipe['water'];
+        $recipe = $this->recipes[$request->validated('type')];
+        $requiredCoffee = $recipe['coffee']['quantity'];
+        $requiredWater = $recipe['water']['quantity'];
 
         if ($requiredCoffee > $remainingCoffee) {
             return $this->errorResponse(
@@ -61,10 +61,7 @@ class BrewCoffeeController extends BaseMachineController
             data: [
                 'type' => $request->validated('type'),
                 'recipe' => $recipe,
-                'containers' => [
-                    'coffee' => $this->coffee->get(),
-                    'water' => $this->water->get(),
-                ],
+                'containers' => $this->containers(),
             ]
         );
     }

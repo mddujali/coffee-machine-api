@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Enums\Container as ContainerEnum;
+use App\Enums\Status;
 use App\Exceptions\Json\HttpJsonException;
 use App\Models\Container;
 use Illuminate\Http\Response;
@@ -13,13 +14,13 @@ final class CoffeeContainerService extends BaseContainerService
 {
     public function add(float $quantity): void
     {
-        $container = $this->findContainer();
+        $container = $this->container();
         $container->increment('size', $quantity);
     }
 
     public function use(float $quantity): float
     {
-        $container = $this->findContainer();
+        $container = $this->container();
         $container->decrement('size', $quantity);
         $container->refresh();
 
@@ -28,13 +29,14 @@ final class CoffeeContainerService extends BaseContainerService
 
     public function get(): float
     {
-        return $this->findContainer()->size;
+        return $this->container()->size;
     }
 
-    protected function findContainer(): Container
+    public function container(): Container
     {
         $container = Container::query()
             ->where('type', ContainerEnum::COFFEE)
+            ->where('status', Status::ACTIVE)
             ->first();
 
         if ( ! $container) {

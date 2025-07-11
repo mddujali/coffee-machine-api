@@ -23,13 +23,28 @@ class GetStatusTest extends BaseTestCase
         $response->assertExactJsonStructure([
             'message',
             'data' => [
-                'recipe' => [
-                    'espresso' => ['coffee', 'water'],
-                    'double_espresso' => ['coffee', 'water'],
-                    'ristretto' => ['coffee', 'water'],
-                    'americano' => ['coffee', 'water'],
+                'recipes' => [
+                    'espresso' => [
+                        'coffee' => ['quantity', 'unit'],
+                        'water' => ['quantity', 'unit'],
+                    ],
+                    'double_espresso' => [
+                        'coffee' => ['quantity', 'unit'],
+                        'water' => ['quantity', 'unit'],
+                    ],
+                    'ristretto' => [
+                        'coffee' => ['quantity', 'unit'],
+                        'water' => ['quantity', 'unit'],
+                    ],
+                    'americano' => [
+                        'coffee' => ['quantity', 'unit'],
+                        'water' => ['quantity', 'unit'],
+                    ],
                 ],
-                'containers' => ['coffee', 'water'],
+                'containers' => [
+                    'coffee' => ['id', 'quantity', 'unit'],
+                    'water' => ['id', 'quantity', 'unit'],
+                ],
             ],
         ]);
     }

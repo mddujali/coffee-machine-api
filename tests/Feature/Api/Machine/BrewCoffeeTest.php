@@ -6,6 +6,8 @@ namespace Tests\Feature\Api\Machine;
 
 use App\Enums\Coffee;
 use App\Enums\Container as ContainerEnum;
+use App\Enums\Status;
+use App\Enums\Unit;
 use App\Models\Container;
 use Database\Seeders\ContainerSeeder;
 use Generator;
@@ -46,10 +48,14 @@ class BrewCoffeeTest extends BaseTestCase
                 [
                     'type' => ContainerEnum::COFFEE->value,
                     'size' => 2,
+                    'unit' => Unit::GRAMS->value,
+                    'status' => Status::ACTIVE->value,
                 ],
                 [
                     'type' => ContainerEnum::WATER->value,
-                    'size' => 500,
+                    'size' => 2000,
+                    'unit' => Unit::MILLILITERS->value,
+                    'status' => Status::ACTIVE->value,
                 ],
             ],
             ['type' => Coffee::ESPRESSO->value],
@@ -59,11 +65,15 @@ class BrewCoffeeTest extends BaseTestCase
             [
                 [
                     'type' => ContainerEnum::COFFEE->value,
-                    'size' => 2000,
+                    'size' => 500,
+                    'unit' => Unit::GRAMS->value,
+                    'status' => Status::ACTIVE->value,
                 ],
                 [
                     'type' => ContainerEnum::WATER->value,
                     'size' => 2,
+                    'unit' => Unit::MILLILITERS->value,
+                    'status' => Status::ACTIVE->value,
                 ],
             ],
             ['type' => Coffee::ESPRESSO->value],
@@ -190,8 +200,14 @@ class BrewCoffeeTest extends BaseTestCase
             'message',
             'data' => [
                 'type',
-                'recipe' => ['coffee', 'water'],
-                'containers' => ['coffee', 'water'],
+                'recipe' => [
+                    'coffee' => ['quantity', 'unit'],
+                    'water' => ['quantity', 'unit'],
+                ],
+                'containers' => [
+                    'coffee' => ['id', 'quantity', 'unit'],
+                    'water' => ['id', 'quantity', 'unit'],
+                ],
             ],
         ]);
 
