@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api\Machine;
 
 use App\Enums\Container as ContainerEnum;
 use App\Http\Requests\Api\Machine\RefillContainerRequest;
+use App\Http\Resources\Api\Containers\ContainerResource;
 use Illuminate\Http\JsonResponse;
 
 class RefillContainerController extends BaseMachineController
@@ -22,13 +23,16 @@ class RefillContainerController extends BaseMachineController
         };
 
         $container = match ($request->validated('type')) {
-            ContainerEnum::COFFEE->value => $this->coffee->get(),
-            ContainerEnum::WATER->value => $this->water->get(),
+            ContainerEnum::COFFEE->value => $this->coffee->container(),
+            ContainerEnum::WATER->value => $this->water->container(),
         };
 
         return $this->successResponse(
-            message: 'Container has been refilled.',
-            data:[$request->validated('type') => $container]
+            message: sprintf(
+                '%s container has been refilled.',
+                ContainerEnum::from($request->validated('type'))->label()
+            ),
+            data:['container' => new ContainerResource($container)]
         );
     }
 }

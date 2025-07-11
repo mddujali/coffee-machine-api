@@ -2,41 +2,34 @@
 
 declare(strict_types=1);
 
-namespace Api\Machine;
+namespace Tests\Feature\Api\Machine;
 
 use Database\Seeders\ContainerSeeder;
-use Database\Seeders\RecipeSeeder;
 use Illuminate\Http\Response;
 use Tests\Feature\Api\BaseTestCase;
 
-class GetStatusTest extends BaseTestCase
+class GetContainersTest extends BaseTestCase
 {
-    public function test_it_should_return_machine_status(): void
+    public function test_it_should_return_machine_containers(): void
     {
         $this->seed(ContainerSeeder::class);
-        $this->seed(RecipeSeeder::class);
 
         $response = $this->json(
             method: 'GET',
-            uri: route('api.machine.status'),
+            uri: route('api.machine.containers'),
         );
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertExactJsonStructure([
             'message',
             'data' => [
-                'recipes' => [
+                'containers' => [
                     '*' => [
                         '*' => [
                             'id',
-                            'coffee' => ['quantity', 'unit'],
-                            'water' => ['quantity', 'unit'],
+                            'quantity',
+                            'unit' => ['label', 'value'],
                         ],
-                    ],
-                ],
-                'containers' => [
-                    '*' => [
-                        '*' => ['id', 'quantity', 'unit'],
                     ],
                 ],
             ],

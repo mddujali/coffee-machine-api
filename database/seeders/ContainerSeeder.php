@@ -24,6 +24,8 @@ class ContainerSeeder extends Seeder
                 'limit' => 500,
                 'unit' => Unit::GRAMS,
                 'status' => Status::ACTIVE,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'type' => ContainerEnum::COFFEE,
@@ -31,6 +33,8 @@ class ContainerSeeder extends Seeder
                 'limit' => 1000,
                 'unit' => Unit::GRAMS,
                 'status' => Status::INACTIVE,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'type' => ContainerEnum::COFFEE,
@@ -38,6 +42,8 @@ class ContainerSeeder extends Seeder
                 'limit' => 1500,
                 'unit' => Unit::GRAMS,
                 'status' => Status::INACTIVE,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'type' => ContainerEnum::WATER,
@@ -45,6 +51,8 @@ class ContainerSeeder extends Seeder
                 'limit' => 4000,
                 'unit' => Unit::MILLILITERS,
                 'status' => Status::INACTIVE,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'type' => ContainerEnum::WATER,
@@ -52,6 +60,8 @@ class ContainerSeeder extends Seeder
                 'limit' => 2000,
                 'unit' => Unit::MILLILITERS,
                 'status' => Status::ACTIVE,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'type' => ContainerEnum::WATER,
@@ -59,6 +69,8 @@ class ContainerSeeder extends Seeder
                 'limit' => 6000,
                 'unit' => Unit::MILLILITERS,
                 'status' => Status::INACTIVE,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\Machine\BrewCoffeeController;
+use App\Http\Controllers\Api\Machine\GetContainersController;
 use App\Http\Controllers\Api\Machine\GetStatusController;
 use App\Http\Controllers\Api\Machine\RefillContainerController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,13 @@ Route::prefix('machine')
         Route::get('status', GetStatusController::class)
             ->name('status');
 
-        Route::post('container', RefillContainerController::class)
-            ->name('container');
+        Route::get('containers', GetContainersController::class)
+            ->name('containers');
+
+        Route::prefix('container')
+            ->name('container.')
+            ->group(function (): void {
+                Route::post('refill', RefillContainerController::class)
+                    ->name('refill');
+            });
     });

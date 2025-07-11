@@ -39,7 +39,7 @@ class RefillContainerTest extends BaseTestCase
     {
         $response = $this->json(
             method: 'POST',
-            uri: route('api.machine.container'),
+            uri: route('api.machine.container.refill'),
             data: $data
         );
 
@@ -58,14 +58,22 @@ class RefillContainerTest extends BaseTestCase
 
         $response = $this->json(
             method: 'POST',
-            uri: route('api.machine.container'),
+            uri: route('api.machine.container.refill'),
             data: $data
         );
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertExactJsonStructure([
             'message',
-            'data' => [$data['type']]
+            'data' => [
+                'container' => [
+                    '*' => [
+                        'id',
+                        'quantity',
+                        'unit' => ['label', 'value'],
+                    ],
+                ],
+            ],
         ]);
     }
 }

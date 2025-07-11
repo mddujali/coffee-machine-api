@@ -13,4 +13,12 @@ enum Container: string
     case COFFEE = 'coffee';
 
     case WATER = 'water';
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::COFFEE => 'Coffee',
+            self::WATER => 'Water',
+        };
+    }
 }
