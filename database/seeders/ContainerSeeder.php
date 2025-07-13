@@ -19,6 +19,7 @@ class ContainerSeeder extends Seeder
     {
         $containers = [
             [
+                'name' => '500',
                 'type' => ContainerEnum::COFFEE,
                 'size' => 500,
                 'limit' => 500,
@@ -28,6 +29,7 @@ class ContainerSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'name' => '1000',
                 'type' => ContainerEnum::COFFEE,
                 'size' => 1000,
                 'limit' => 1000,
@@ -37,6 +39,7 @@ class ContainerSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'name' => '1500',
                 'type' => ContainerEnum::COFFEE,
                 'size' => 1500,
                 'limit' => 1500,
@@ -46,6 +49,7 @@ class ContainerSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'name' => '4000',
                 'type' => ContainerEnum::WATER,
                 'size' => 4000,
                 'limit' => 4000,
@@ -55,6 +59,7 @@ class ContainerSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'name' => '2000',
                 'type' => ContainerEnum::WATER,
                 'size' => 2000,
                 'limit' => 2000,
@@ -64,6 +69,7 @@ class ContainerSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'name' => '6000',
                 'type' => ContainerEnum::WATER,
                 'size' => 6000,
                 'limit' => 6000,

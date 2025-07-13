@@ -20,6 +20,7 @@ class ContainerTest extends BaseModelTestCase
 
         $this->columns = [
             'id',
+            'name',
             'type',
             'size',
             'limit',
@@ -30,6 +31,7 @@ class ContainerTest extends BaseModelTestCase
         ];
 
         $this->fillable = [
+            'name',
             'type',
             'size',
             'unit',

@@ -17,6 +17,7 @@ class Container extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'type',
         'size',
         'unit',
@@ -25,6 +26,7 @@ class Container extends Model
     protected function casts(): array
     {
         return [
+            'name' => 'string',
             'type' => 'string',
             'size' => 'float',
             'unit' => 'string',

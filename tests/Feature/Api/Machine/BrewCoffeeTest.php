@@ -218,6 +218,7 @@ class BrewCoffeeTest extends BaseTestCase
                 'containers' => [
                     '*' => [
                         'id',
+                        'name',
                         'type',
                         'quantity',
                         'unit' => ['label', 'value'],

@@ -11,6 +11,7 @@ use Override;
 
 /**
  * @property-read int $id
+ * @property-read string $name
  * @property-read string $type
  * @property-read float $size
  * @property-read string $unit
@@ -24,6 +25,7 @@ class ContainerResource extends BaseJsonResource
 
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'type' => $this->type,
             'quantity' => $this->size,
             'unit' => [

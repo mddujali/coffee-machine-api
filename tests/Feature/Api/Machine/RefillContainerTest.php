@@ -67,6 +67,7 @@ class RefillContainerTest extends BaseTestCase
             'message',
             'data' => [
                 'id',
+                'name',
                 'type',
                 'quantity',
                 'unit' => ['label', 'value'],

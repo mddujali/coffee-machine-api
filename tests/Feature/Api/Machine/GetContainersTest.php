@@ -25,6 +25,7 @@ class GetContainersTest extends BaseTestCase
             'data' => [
                 '*' => [
                     'id',
+                    'name',
                     'type',
                     'quantity',
                     'unit' => ['label', 'value'],
