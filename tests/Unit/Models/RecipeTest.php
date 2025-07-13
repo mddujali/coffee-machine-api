@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Models;
 
-use App\Models\Container;
 use App\Models\Recipe;
 use Override;
 use Tests\Unit\Models\BaseModelTestCase;

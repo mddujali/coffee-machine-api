@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Machine\BrewCoffeeController;
 use App\Http\Controllers\Api\Machine\GetContainersController;
 use App\Http\Controllers\Api\Machine\GetStatusController;
 use App\Http\Controllers\Api\Machine\RefillContainerController;
+use App\Http\Controllers\Api\Machine\UseContainerController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('machine')
@@ -23,6 +24,9 @@ Route::prefix('machine')
         Route::prefix('container')
             ->name('container.')
             ->group(function (): void {
+                Route::patch('use', UseContainerController::class)
+                    ->name('use');
+
                 Route::patch('refill', RefillContainerController::class)
                     ->name('refill');
             });
