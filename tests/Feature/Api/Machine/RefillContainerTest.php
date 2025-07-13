@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Api\Machine;
 
 use App\Enums\Container as ContainerEnum;
+use App\Models\Container;
 use Database\Seeders\ContainerSeeder;
 use Generator;
 use Illuminate\Http\Response;
@@ -47,9 +48,32 @@ class RefillContainerTest extends BaseTestCase
         $response->assertExactJsonStructure(['message', 'error_code', 'errors']);
     }
 
+    public function test_it_should_return_reached_limit_container(): void
+    {
+        $this->artisan('db:seed', ['--class' => ContainerSeeder::class]);
+
+        $data = [
+            'type' => ContainerEnum::COFFEE->value,
+            'quantity' => 200,
+        ];
+
+        $response = $this->json(
+            method: 'PATCH',
+            uri: route('api.machine.container.refill'),
+            data: $data
+        );
+
+        $response->assertStatus(Response::HTTP_BAD_REQUEST);
+        $response->assertExactJsonStructure(['message', 'error_code', 'errors']);
+    }
+
     public function test_it_should_refill_container(): void
     {
         $this->artisan('db:seed', ['--class' => ContainerSeeder::class]);
+
+        $container = Container::query()->first();
+        $container->decrement('size', 200);
+        $container->save();
 
         $data = [
             'type' => ContainerEnum::COFFEE->value,
