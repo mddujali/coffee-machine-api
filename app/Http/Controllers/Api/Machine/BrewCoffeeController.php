@@ -44,11 +44,13 @@ class BrewCoffeeController extends BaseMachineController
                 status: Response::HTTP_BAD_REQUEST,
                 message: 'Coffee is not enough.',
                 errors: [
-                    'coffee' => sprintf(
-                        'The remaining coffee is %s but the required is %s.',
-                        $remainingCoffee . Unit::GRAMS->label(),
-                        $requiredCoffee . Unit::GRAMS->label(),
-                    ),
+                    'coffee' => [
+                        sprintf(
+                            'The remaining coffee is %s but the required is %s.',
+                            $remainingCoffee . Unit::GRAMS->label(),
+                            $requiredCoffee . Unit::GRAMS->label(),
+                        )
+                    ],
                 ]
             );
         }
@@ -58,11 +60,13 @@ class BrewCoffeeController extends BaseMachineController
                 status: Response::HTTP_BAD_REQUEST,
                 message: 'Water is not enough.',
                 errors: [
-                    'water' => sprintf(
-                        'The remaining water is %s but the required is %s.',
-                        $remainingWater . Unit::MILLILITERS->label(),
-                        $requiredWater . Unit::MILLILITERS->label()
-                    ),
+                    'water' => [
+                        sprintf(
+                            'The remaining water is %s but the required is %s.',
+                            $remainingWater . Unit::MILLILITERS->label(),
+                            $requiredWater . Unit::MILLILITERS->label()
+                        )
+                    ],
                 ]
             );
         }
