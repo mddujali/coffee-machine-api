@@ -76,7 +76,7 @@ class BrewCoffeeController extends BaseMachineController
         $this->water->use($requiredWater);
 
         return $this->successResponse(
-            message: 'Coffee has been brewed.',
+            message: capitalize($request->validated('type')) . ' has been brewed.',
             data: [
                 'recipe' => new RecipeResource($recipe),
                 'containers' => $this->containers(),

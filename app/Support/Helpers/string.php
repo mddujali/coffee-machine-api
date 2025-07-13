@@ -15,3 +15,10 @@ if ( ! function_exists('studly')) {
         return Str::studly($string);
     }
 }
+
+if ( ! function_exists('capitalize')) {
+    function capitalize(string $string): string
+    {
+        return ucwords(Str::replace('_', ' ', $string));
+    }
+}
