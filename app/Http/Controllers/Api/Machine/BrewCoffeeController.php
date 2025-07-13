@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\Machine;
 
 use App\Enums\Unit;
+use App\Exceptions\Json\HttpJsonException;
 use App\Http\Requests\Api\Machine\BrewCoffeeRequest;
 use App\Http\Resources\Api\Recipes\RecipeResource;
 use App\Models\Recipe;
@@ -16,6 +17,7 @@ class BrewCoffeeController extends BaseMachineController
     /**
      * @param BrewCoffeeRequest $request
      * @return JsonResponse
+     * @throws HttpJsonException
      */
     public function __invoke(BrewCoffeeRequest $request)
     {

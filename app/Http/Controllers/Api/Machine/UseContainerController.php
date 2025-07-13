@@ -11,11 +11,18 @@ use App\Http\Resources\Api\Containers\ContainerResource;
 use App\Models\Container;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class UseContainerController extends BaseController
 {
+    /**
+     * @param UseContainerRequest $request
+     * @return ContainerResource|JsonResponse
+     * @throws Throwable
+     */
     public function __invoke(UseContainerRequest $request)
     {
         DB::beginTransaction();

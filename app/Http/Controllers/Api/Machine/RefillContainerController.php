@@ -32,7 +32,7 @@ class RefillContainerController extends BaseMachineController
             ->setMessage(
                 sprintf(
                     '%s container has been refilled.',
-                    ContainerEnum::from($request->validated('type'))->label()
+                    $container->name
                 )
             );
     }

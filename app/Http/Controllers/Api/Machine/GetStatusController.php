@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Machine;
 
+use App\Exceptions\Json\HttpJsonException;
 use App\Http\Resources\Api\Recipes\RecipeCollection;
 use App\Models\Recipe;
 use Illuminate\Http\JsonResponse;
@@ -14,6 +15,7 @@ class GetStatusController extends BaseMachineController
     /**
      * @param Request $request
      * @return JsonResponse
+     * @throws HttpJsonException
      */
     public function __invoke(Request $request)
     {

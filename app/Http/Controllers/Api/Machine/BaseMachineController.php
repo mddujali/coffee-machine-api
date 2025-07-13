@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Machine;
 
+use App\Exceptions\Json\HttpJsonException;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Resources\Api\Containers\ContainerResource;
 use App\Services\CoffeeContainerService;
@@ -26,6 +27,10 @@ abstract class BaseMachineController extends BaseController
 
     }
 
+    /**
+     * @return array
+     * @throws HttpJsonException
+     */
     protected function containers(): array
     {
         return [
