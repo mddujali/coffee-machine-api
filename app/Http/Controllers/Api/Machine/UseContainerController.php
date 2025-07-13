@@ -48,7 +48,7 @@ class UseContainerController extends BaseController
         }
 
         return (new ContainerResource($container))
-            ->setMessage(__('shared.common.success'));
+            ->setMessage('Container ' . $container->name . ' is in use.');
     }
 
     private function unuseContainer(string $type): void
